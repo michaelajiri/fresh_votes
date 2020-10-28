@@ -10,4 +10,9 @@ public class DashboardController {
 	public String homePage() {
 		return "index";
 	}
+	
+	@GetMapping(value = "/dashboard")
+	public String dashboard() {
+		return "dashboard";
+	}
 }

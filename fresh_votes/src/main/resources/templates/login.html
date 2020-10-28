@@ -5,7 +5,7 @@
 <title>FreshVotes LoginPage</title>
 </head>
 <body>
-	<form action="${loginProcessingUrl}" method="post">
+	<form th:action="@{/login}" method="post">
 		<fieldset>
 			<legend>Please Login</legend>
 			<!-- use param.error assuming FormLoginConfigurer#failureUrl contains the query parameter error -->
