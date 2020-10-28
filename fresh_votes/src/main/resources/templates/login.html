@@ -24,8 +24,8 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-2" style="background-color: gray; height: 100px;"></div>
-			<div class="col-4" style="background-color: black; height: 100px;"></div>
+			<div class="col-3" style="background-color: gray; height: 100px;"></div>
+			<div class="col-3" style="background-color: black; height: 100px;"></div>
 			<div class="col-6" style="background-color: green; height: 100px;"></div>
 		</div>
 		<div class="row">
@@ -47,23 +47,36 @@
 						<div th:if="${param.logout != null}">
 							<div>You have been logged out.</div>
 						</div>
-						<p>
-							<label for="username">Username</label> <input type="text"
-								id="username" name="username" />
-						</p>
-						<p>
-							<label for="password">Password</label> <input type="password"
-								id="password" name="password" />
-						</p>
+						<div class="form-group row">
+							<label for="username" class="col-2 col-form-label">Username</label>
+							<div class="col-10">
+								<input type="text" class="form-control" placeholder="Username"
+									id="username" name="username" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="password" class="col-2 col-form-label">Password</label>
+							<div class="col-10">
+								<input type="password" class="form-control"
+									placeholder="Password" id="password" name="password" />
+							</div>
+						</div>
 						<!-- if using RememberMeConfigurer make sure remember-me matches RememberMeConfigurer#rememberMeParameter -->
 						<p>
 							<label for="remember-me">Remember Me?</label> <input
 								type="checkbox" id="remember-me" name="remember-me" />
 						</p>
 						<div>
-							<button type="submit" class="btn btn-primary">Log in</button>
-							<button type="button" class="btn btn-info" id="createAccount">Create
-								Account</button>
+							<div class="row">
+								<div class="col-6">
+									<button type="submit" class="btn btn-primary">Log in</button>
+								</div>
+								<div class="col-6">
+									<button type="button" class="btn btn-info float-right" id="createAccount">Create
+										Account</button>
+								</div>
+							</div>
+
 						</div>
 					</fieldset>
 				</form>
