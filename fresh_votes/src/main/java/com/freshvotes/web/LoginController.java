@@ -6,10 +6,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.freshvotes.domain.User;
+import com.freshvotes.service.UserService;
 
 @Controller
 public class LoginController {
 	
+	private UserService userService;
+	
+	public LoginController(UserService userService) {
+		this.userService = userService;
+	}
+
 	@GetMapping(value = "/login")
 	public String login() {
 		return "login";
@@ -23,7 +30,7 @@ public class LoginController {
 	
 	@PostMapping(value = "/register")
 	public String createAccount(User user) {
-		System.out.println(user);
-		return "redirect:/register";
+		userService.addUser(user);
+		return "redirect:/login";
 	}
 }
