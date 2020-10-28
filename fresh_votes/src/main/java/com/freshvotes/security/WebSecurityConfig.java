@@ -6,12 +6,19 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	private UserDetailsService userDetailsService;
+	
+	public WebSecurityConfig(UserDetailsService userDetailsService) {
+		this.userDetailsService = userDetailsService;
+	}
+
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -19,11 +26,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-		.passwordEncoder(passwordEncoder())
-		.withUser("mayk89@gmail.com")
-		.password(passwordEncoder().encode("demo"))
-		.roles("USER");
+		auth
+		.userDetailsService(userDetailsService)
+		.passwordEncoder(passwordEncoder());
+		
+//		auth.inMemoryAuthentication()
+//		.passwordEncoder(passwordEncoder())
+//		.withUser("mayk89@gmail.com")
+//		.password(passwordEncoder().encode("demo"))
+//		.roles("USER");
 	}
 	
 	@Override
@@ -31,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
+		.antMatchers("/admin/**").hasRole("ADMIN")
 		.anyRequest().hasRole("USER")
 		.and()
 		.formLogin()
