@@ -1,5 +1,11 @@
 package com.freshvotes.web;
 
+import java.io.IOException;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,7 +19,7 @@ import com.freshvotes.repositories.ProductRepository;
 
 @Controller
 public class ProductController {
-	
+
 	private ProductRepository productRepository;
 
 	public ProductController(ProductRepository productRepository) {
@@ -24,21 +30,31 @@ public class ProductController {
 	public String getProducts(ModelMap modelMap) {
 		return "product";
 	}
-	
+
 	@GetMapping(value = "/products/{productId}")
-	public String getProduct(@PathVariable Long productId) {
+	public String getProduct(@PathVariable Long productId, ModelMap modelMap, HttpServletResponse response)
+			throws IOException {
+
+		Optional<Product> productOpt = productRepository.findById(productId);
+		if (productOpt.isPresent()) {
+			Product product = productOpt.get();
+			modelMap.put("product", product);
+		} else {
+			response.sendError(HttpStatus.NOT_FOUND.value(), "Product with id " + productId + " was not found");
+			return "product";
+		}
 		return "product";
 	}
-	
+
 	@PostMapping(value = "/products")
 	public String createProduct(@AuthenticationPrincipal User user) {
 		Product product = new Product();
-	
+
 		product.setPublished(false);
 		product.setUser(user);
-		
+
 		product = productRepository.save(product);
-		
+
 		return "redirect:/products/" + product.getId();
 	}
 }

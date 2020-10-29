@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.userDetailsService(userDetailsService)
 		.passwordEncoder(passwordEncoder());
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/").permitAll()
 		.antMatchers("/register").permitAll()
 		.antMatchers("/admin/**").hasRole("ADMIN")
-		.anyRequest().hasRole("ADMIN")
+		.antMatchers("/products/**").hasAnyRole("ADMIN", "USER")
 		.and()
 		.formLogin()
 		.loginPage("/login")

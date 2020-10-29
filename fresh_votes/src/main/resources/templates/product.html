@@ -8,11 +8,14 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-
 </head>
+
 <body>
-
-<h2>Create a Product</h2>
-
+	<div class="container" th:if="${product != null}">
+		<h2>Create a Product</h2>
+		<div th:text="|Is product published: ${product.published}|">
+			Here's is the content of the div text
+		</div>
+	</div>
 </body>
 </html>
