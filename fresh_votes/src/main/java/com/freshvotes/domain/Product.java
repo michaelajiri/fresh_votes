@@ -17,6 +17,7 @@ public class Product {
 
 	private Long id;
 	private String name;
+	private Boolean published;
 	private User user;
 	private Set<Feature> features = new HashSet<>();
 	
@@ -38,6 +39,14 @@ public class Product {
 		this.name = name;
 	}
 	
+	public Boolean getPublished() {
+		return published;
+	}
+
+	public void setPublished(Boolean published) {
+		this.published = published;
+	}
+
 	@ManyToOne
 	public User getUser() {
 		return user;
