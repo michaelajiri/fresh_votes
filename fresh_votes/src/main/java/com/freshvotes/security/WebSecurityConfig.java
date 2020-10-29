@@ -29,12 +29,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth
 		.userDetailsService(userDetailsService)
 		.passwordEncoder(passwordEncoder());
-		
-//		auth.inMemoryAuthentication()
-//		.passwordEncoder(passwordEncoder())
-//		.withUser("mayk89@gmail.com")
-//		.password(passwordEncoder().encode("demo"))
-//		.roles("USER");
 	}
 	
 	@Override
