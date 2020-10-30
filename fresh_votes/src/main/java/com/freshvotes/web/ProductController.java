@@ -26,11 +26,6 @@ public class ProductController {
 		this.productRepository = productRepository;
 	}
 
-	@GetMapping(value = "/products")
-	public String getProducts(ModelMap modelMap) {
-		return "product";
-	}
-
 	@GetMapping(value = "/products/{productId}")
 	public String getProduct(@PathVariable Long productId, ModelMap modelMap, HttpServletResponse response)
 			throws IOException {
