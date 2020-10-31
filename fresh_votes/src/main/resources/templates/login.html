@@ -17,6 +17,8 @@
 </script>
 </head>
 <body>
+
+	<div th:replace="fragments/header :: navbar"></div>
 	<div class="container">
 		<div class="card" style="margin-top: 1.5em;">
 			<div class="card-header">
@@ -43,8 +45,8 @@
 						<label for="username"
 							class="col-12 col-sm-3 col-md-2 col-form-label">Username</label>
 						<div class="col-12 col-sm-9 col-md-10">
-							<input type="email" class="form-control" placeholder="Insert username"
-								id="username" name="username" />
+							<input type="email" class="form-control"
+								placeholder="Insert username" id="username" name="username" />
 						</div>
 					</div>
 					<div class="form-group row">
@@ -60,10 +62,12 @@
 						<label for="remember-me">Remember Me?</label> <input
 							type="checkbox" id="remember-me" name="remember-me" />
 					</p>
-						<div>
-							<button type="submit" class="btn btn-lg btn-primary">Log in</button>
-							<button type="button" class="btn btn-lg btn-info float-right" id="createAccount">Create Account</button>
-						</div>
+					<div>
+						<button type="submit" class="btn btn-lg btn-primary">Log
+							in</button>
+						<button type="button" class="btn btn-lg btn-info float-right"
+							id="createAccount">Create Account</button>
+					</div>
 				</form>
 			</div>
 		</div>
